@@ -1270,11 +1270,11 @@ def generate_output(base, output_type, out_file, exts=None, group="none", ignore
     return out_file
 
 def run_gui(script_dir: str, config: dict):
-    """Run the optional Flet one-shot launcher window."""
+    """Run the Flet one-shot launcher window."""
     try:
       import flet as ft
     except ImportError:
-      safe_print("❌ The GUI requires Flet. Install it with: python -m pip install flet")
+      safe_print("❌ Flet is missing from this installation. Reinstall lsw-directory-walker with pip.")
       return
 
     def split_values(value):
@@ -1480,7 +1480,7 @@ if __name__ == "__main__":
     
     # Setup argument parser
     parser = argparse.ArgumentParser(description="LSW: List Walker - generate directory trees and file inventories")
-    parser.add_argument("--gui", action="store_true", help="Open the optional Flet graphical launcher")
+    parser.add_argument("--gui", action="store_true", help="Open the Flet graphical launcher")
     parser.add_argument("--path", default=".", help="Directory to scan")
     parser.add_argument("--preset", "-p", help=f"Load preset (available: {', '.join(get_available_presets(script_dir)) or 'none'})")
     parser.add_argument("--ext", help="Comma-separated extensions to include (e.g., '.py,.js')")

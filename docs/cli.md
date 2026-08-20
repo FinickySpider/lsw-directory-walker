@@ -3,10 +3,12 @@
 ## Invocation
 
 ```text
-python lsw.py [options]
+lsw [options]
 ```
 
-The graphical launcher is included when LSW is installed as a package:
+When running directly from a source checkout, `python lsw.py [options]` is equivalent.
+
+The graphical launcher is included in the PyPI package:
 
 ```powershell
 py -m pip install lsw-directory-walker

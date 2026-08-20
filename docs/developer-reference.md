@@ -24,7 +24,7 @@
 ```mermaid
 flowchart TD
     A[Parse CLI] --> B[Load config]
-    B --> C[Load optional preset]
+    B --> C[Load user or local preset]
     C --> D[Load .lswignore and CLI rules]
     D --> E[Parse size and date filters]
     E --> F{Output type}

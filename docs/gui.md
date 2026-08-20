@@ -1,6 +1,6 @@
 # Graphical Launcher
 
-LSW includes an optional one-shot graphical launcher built with Flet. It is designed for quickly choosing scan settings, generating one report, and closing rather than running as a permanent dashboard.
+LSW includes a one-shot graphical launcher built with Flet. It is designed for quickly choosing scan settings, generating one report, and closing rather than running as a permanent dashboard.
 
 The launcher is vertically scrollable. The annotated captures below pair each part of the form with its legend so you can read the labels without scrolling back and forth. On narrow screens, Retype stacks each pair vertically.
 
@@ -90,12 +90,12 @@ When the output type is HTML, the generated report is a snapshot. The report emb
 
 You can move, rename, copy, or send the HTML file independently. The paths shown in the report remain the paths captured at generation time, so a copied path may not exist on the recipient's computer even though the report itself continues to work.
 
-## Dependency note
+## CLI and dependency note
 
-Flet is optional. CLI users can continue using:
+Flet is installed automatically with the PyPI package. CLI users can continue using:
 
 ```powershell
-python lsw.py --path . --type json
+lsw --path . --type json
 ```
 
-without installing the GUI dependency.
+The GUI dependency is present even when the graphical launcher is not used.

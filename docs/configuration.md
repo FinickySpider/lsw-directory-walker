@@ -2,7 +2,7 @@
 
 ## `lsw-config.json`
 
-The script looks for this file beside `lsw.py`. Missing or invalid JSON falls back to built-in defaults. Recognized values are merged from `defaults` and `ui` objects:
+The script looks for this file in the user configuration directory and source/package locations. Missing or invalid JSON falls back to built-in defaults. Recognized values are merged from `defaults` and `ui` objects:
 
 ```json
 {
@@ -26,7 +26,7 @@ Command-line arguments are parsed after config loading. A preset is then loaded,
 
 ## Presets
 
-Presets live in `lsw-presets/` beside the script. Each file is named `<name>.json` and has an `args` object:
+Presets can live in the user configuration directory, the current directory, or the source/package locations. Each file is named `<name>.json` and has an `args` object:
 
 ```json
 {

@@ -2,12 +2,15 @@
 
 LSW (List Walker) is a Python command-line utility inspired by `ls` that walks a directory and produces a browsable HTML tree, a plain-text tree, or structured exports. It can filter results by name patterns, regular expressions, directory scope, file extension, size, modification date, and traversal depth.
 
+Public package: [lsw-directory-walker on PyPI](https://pypi.org/project/lsw-directory-walker/).
+
 ## Documentation
 
 This repository includes a Retype documentation site. Run `retype start` from the repository root to preview it, or `retype build` to generate static files in `.retype/`.
 
 - [CLI reference](docs/cli.md): installation, command syntax, options, and examples.
-- [Graphical launcher](docs/gui.md): the optional Flet one-shot interface.
+- [Installation](docs/installation.md): install the public PyPI package and use the `lsw` command.
+- [Graphical launcher](docs/gui.md): the Flet one-shot interface included with the package.
 - [Configuration and presets](docs/configuration.md): `lsw-config.json`, presets, and `.lswignore`.
 - [Filtering guide](docs/filtering.md): how filters combine and how directory traversal behaves.
 - [Output formats](docs/outputs.md): HTML, TXT, CSV, JSON, JSONL, and Markdown details.
@@ -26,11 +29,13 @@ Documentation deployment is automated by `.github/workflows/retype-pages.yml`. S
 
 ## Install as a command
 
-Install the current checkout:
+Install the public package:
 
 ```powershell
-py -m pip install .
+py -m pip install lsw-directory-walker
 ```
+
+For development, install the current checkout with `py -m pip install .`.
 
 After installation, use LSW from any directory:
 

@@ -1,6 +1,6 @@
 {
   "version": "4.5.2",
-  "created": "2026-08-20T20:19:15Z",
+  "created": "2026-08-20T20:34:19Z",
   "files": [
     {
       "path": ".nojekyll"
@@ -67,6 +67,12 @@
     },
     {
       "path": "index.html"
+    },
+    {
+      "path": "installation.md"
+    },
+    {
+      "path": "installation\\index.html"
     },
     {
       "path": "llms.txt"
