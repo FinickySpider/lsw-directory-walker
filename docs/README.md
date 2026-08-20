@@ -30,6 +30,7 @@ This documentation describes the complete current behavior of the script, includ
 - [Filtering and traversal](filtering.md): understand include, ignore, size, date, and depth rules.
 - [Output formats](outputs.md): choose HTML, TXT, CSV, JSON, JSONL, or Markdown.
 - [stdout and stderr integration](streams.md): connect LSW to applications, AI tools, and pipelines.
+- [AI and coding workflows](ai-workflows.md): use LSW for repository orientation, context preparation, and automation.
 - [HTML report guide](html-report.md): use search, grouping, analytics, copying, and printing.
 
 ### Maintain and publish
@@ -49,6 +50,7 @@ flowchart LR
 	C --> D[Filter]
 	D --> E[Choose output]
 	E --> F[Integrate stdout]
+	F --> K[Prepare AI context]
 	B --> G[Use GUI]
 	E --> H[Read HTML report]
 	H --> I[Deploy docs]

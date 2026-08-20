@@ -22,6 +22,8 @@ This repository includes a Retype documentation site. Run `retype start` from th
 - [Configuration and presets](docs/configuration.md): `lsw-config.json`, presets, and `.lswignore`.
 - [Filtering guide](docs/filtering.md): how filters combine and how directory traversal behaves.
 - [Output formats](docs/outputs.md): HTML, TXT, CSV, JSON, JSONL, and Markdown details.
+- [stdout and stderr integration](docs/streams.md): consume clean serialized output from applications and pipelines.
+- [AI and coding workflows](docs/ai-workflows.md): use LSW for repository orientation, context preparation, and automation.
 - [stdout and stderr integration](docs/streams.md): consume LSW output from applications, AI tools, and pipelines.
 - [HTML report guide](docs/html-report.md): tree controls, search, grouping, analytics, and browser behavior.
 - [Developer reference](docs/developer-reference.md): function map, execution flow, data contracts, and known implementation notes.
