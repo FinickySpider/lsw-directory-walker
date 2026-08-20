@@ -105,3 +105,14 @@ lsw --path . --type json
 ```
 
 The GUI dependency is present even when the graphical launcher is not used.
+
+## Why the GUI does not expose stdout/stderr
+
+The `--stdout` and `--stdout-only` options are designed for command-line pipelines and parent applications that capture process streams. The GUI intentionally remains file-oriented:
+
+- Choose an output filename in the form.
+- Click **Generate**.
+- Read the saved-path status message in the window.
+- The window closes after a successful export.
+
+All output types and scan filters are still available through the GUI. The GUI uses the same generation functions as the CLI, so it does not need separate stdout/stderr controls. Applications embedding LSW should use the CLI with `--stdout-only`; people using the launcher should use the GUI's saved-file workflow.

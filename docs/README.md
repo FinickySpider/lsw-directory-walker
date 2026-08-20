@@ -38,6 +38,8 @@ This documentation describes the complete current behavior of the script, includ
 - [Documentation deployment](deployment.md): publish the Retype site with GitHub Pages.
 - [Release guide](releasing.md): publish future versions to PyPI.
 
+The GUI is intentionally file-oriented, while stdout/stderr is documented as a CLI integration surface for applications and pipelines.
+
 Use the guide in this order:
 
 ```mermaid
