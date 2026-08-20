@@ -20,9 +20,26 @@ Documentation deployment is automated by `.github/workflows/retype-pages.yml`. S
 ## Requirements
 
 - Python 3.8 or newer is recommended.
-- No third-party Python packages are required.
-- The optional `--gui` launcher requires Flet. Install it with `python -m pip install -r requirements-gui.txt`.
+- Installing the package installs Flet so the GUI is available immediately.
+- On first run, LSW creates editable user defaults, presets, and `.lswignore` under `%APPDATA%\lsw` on Windows.
 - HTML analytics are rendered entirely by the generated report, with no external JavaScript dependency or network connection required.
+
+## Install as a command
+
+Install the current checkout:
+
+```powershell
+py -m pip install .
+```
+
+After installation, use LSW from any directory:
+
+```powershell
+lsw
+lsw --gui
+```
+
+The command remains CLI-first. Running `lsw` does not open a window; use `lsw --gui` for the graphical launcher.
 
 ## Quick start
 
@@ -32,11 +49,10 @@ From the directory containing `lsw.py`:
 python lsw.py --path .
 ```
 
-To open the optional modern desktop launcher:
+To open the modern desktop launcher:
 
 ```powershell
-python -m pip install -r requirements-gui.txt
-python lsw.py --gui
+lsw --gui
 ```
 
 This writes `tree_output.html` and opens it in the default browser. To generate a text tree without opening a browser:
@@ -56,5 +72,6 @@ python lsw.py --path . --type csv --ext .py,.json --ignore node_modules --out in
 - Hidden entries are skipped by the scan functions because names beginning with `.` are filtered out. The `show_hidden` config value is currently not consumed.
 - `--parallel`, `--no-parallel`, and `--workers` are parsed, but the current execution path scans synchronously.
 - The `theme` config value is loaded but the generated HTML starts in dark mode; the report's own theme button persists the user's browser choice in `localStorage`.
-- `.lswignore` is read relative to the directory containing `lsw.py`, not the directory being scanned.
+- `.lswignore` in the scanned directory takes precedence, followed by the current working directory, the file beside `lsw.py`, and finally the packaged default in the Python environment.
+- Existing files in `%APPDATA%\lsw` are never overwritten by first-run initialization.
 - CLI values override preset values only when the parsed CLI value is not `None`; argparse defaults can therefore remain in place instead of being replaced by a preset.

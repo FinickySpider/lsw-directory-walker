@@ -16,6 +16,21 @@ This documentation describes the complete current behavior of the script, includ
 
 ## Quick start
 
+Install LSW as a command from a checkout:
+
+```powershell
+py -m pip install .
+```
+
+Then run it from any directory:
+
+```powershell
+lsw
+lsw --gui
+```
+
+The package installs Flet with LSW. The plain `lsw` command remains CLI-first; the GUI is explicitly selected with `--gui`.
+
 From the repository root:
 
 ```powershell

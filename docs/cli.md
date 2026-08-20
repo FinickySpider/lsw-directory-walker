@@ -6,14 +6,16 @@
 python lsw.py [options]
 ```
 
-The optional graphical launcher is available with Flet. Install the GUI dependency once, then run:
+The graphical launcher is included when LSW is installed as a package:
 
 ```powershell
-python -m pip install -r requirements-gui.txt
-python lsw.py --gui
+py -m pip install lsw-directory-walker
+lsw --gui
 ```
 
-The GUI is a one-shot desktop window. It collects scan settings, runs the same generation functions as the CLI, opens an HTML result unless disabled, and closes after a successful export.
+For a local checkout, use `py -m pip install .` instead.
+
+The GUI is a one-shot desktop window. It collects scan settings, runs the same generation functions as the CLI, opens an HTML result unless disabled, and closes after a successful export. The plain `lsw` command remains CLI-first and does not open a window.
 
 See the full [Graphical Launcher](gui.md) guide for the layout, filter behavior, progress state, and standalone HTML workflow.
 

@@ -1,32 +1,12 @@
 {
   "version": "4.5.2",
-  "created": "2026-08-20T19:54:43Z",
+  "created": "2026-08-20T20:19:15Z",
   "files": [
     {
       "path": ".nojekyll"
     },
     {
       "path": "404.html"
-    },
-    {
-      "path": "assets-copy\\lsw-gui-advanced-annotated.png",
-      "old": true
-    },
-    {
-      "path": "assets-copy\\lsw-gui-advanced.png",
-      "old": true
-    },
-    {
-      "path": "assets-copy\\lsw-gui-top-annotated.png",
-      "old": true
-    },
-    {
-      "path": "assets-copy\\lsw-gui-top.png",
-      "old": true
-    },
-    {
-      "path": "assets-copy\\lsw-gui.png",
-      "old": true
     },
     {
       "path": "assets\\lsw-gui-advanced-annotated.png"
@@ -48,10 +28,6 @@
     },
     {
       "path": "cli\\index.html"
-    },
-    {
-      "path": "CNAME",
-      "old": true
     },
     {
       "path": "configuration.md"

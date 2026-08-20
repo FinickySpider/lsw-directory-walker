@@ -8,6 +8,7 @@ import fnmatch
 import re
 import csv
 import json
+import shutil
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 from mimetypes import guess_extension, types_map
@@ -58,9 +59,58 @@ def get_mime_icon(filepath: str) -> str:
     return MIME_ICONS.get(ext.lower(), '📄')
 
 # ─── Config file handling ──────────────────────────────────────────────────────
+def user_config_dir() -> str:
+  """Return the per-user LSW configuration directory."""
+  if os.name == "nt":
+    base = os.environ.get("APPDATA") or os.path.expanduser("~\\AppData\\Roaming")
+  else:
+    base = os.environ.get("XDG_CONFIG_HOME") or os.path.expanduser("~/.config")
+  return os.path.join(base, "lsw")
+
+def initialize_user_config(script_dir: str) -> str:
+  """Create user defaults and bundled presets without overwriting edits."""
+  config_dir = user_config_dir()
+  try:
+    os.makedirs(os.path.join(config_dir, "lsw-presets"), exist_ok=True)
+    sources = {
+      "lsw-config.json": os.path.join(config_dir, "lsw-config.json"),
+      ".lswignore": os.path.join(config_dir, ".lswignore"),
+    }
+    for filename, destination in sources.items():
+      if os.path.exists(destination):
+        continue
+      source = next((path for path in [os.path.join(script_dir, filename), os.path.join(sys.prefix, filename)] if os.path.exists(path)), None)
+      if source:
+        shutil.copy2(source, destination)
+    preset_dir = os.path.join(config_dir, "lsw-presets")
+    source_dirs = [os.path.join(script_dir, "lsw-presets"), os.path.join(sys.prefix, "lsw-presets")]
+    source_dir = next((path for path in source_dirs if os.path.isdir(path)), None)
+    if source_dir:
+      for filename in os.listdir(source_dir):
+        if filename.endswith(".json"):
+          destination = os.path.join(preset_dir, filename)
+          if not os.path.exists(destination):
+            shutil.copy2(os.path.join(source_dir, filename), destination)
+  except (OSError, PermissionError, shutil.Error):
+    pass
+  return config_dir
+
+def support_paths(script_dir: str, relative_path: str, local_dir: str = None) -> list:
+  """Return support-file locations from most local to most global."""
+  paths = []
+  if local_dir:
+    paths.append(os.path.join(os.path.abspath(local_dir), relative_path))
+  paths.extend([os.path.join(os.getcwd(), relative_path), os.path.join(user_config_dir(), relative_path), os.path.join(script_dir, relative_path)])
+  prefix_path = os.path.join(sys.prefix, relative_path)
+  if prefix_path not in paths:
+    paths.append(prefix_path)
+  cwd_path = os.path.join(os.getcwd(), relative_path)
+  if cwd_path not in paths:
+    paths.append(cwd_path)
+  return paths
+
 def load_config(script_dir: str) -> dict:
     """Load lsw-config.json from script directory."""
-    config_file = os.path.join(script_dir, "lsw-config.json")
     defaults = {
         "type": "html",
         "parallel": True,
@@ -69,59 +119,59 @@ def load_config(script_dir: str) -> dict:
         "no_browser": False
     }
     
-    if not os.path.exists(config_file):
-        return defaults
-    
-    try:
+    for config_file in support_paths(script_dir, "lsw-config.json"):
+      if not os.path.exists(config_file):
+        continue
+      try:
         with open(config_file, 'r', encoding='utf-8') as f:
-            config = json.load(f)
-            # Merge with defaults
-            if 'defaults' in config:
-                defaults.update(config['defaults'])
-            if 'ui' in config:
-                defaults.update(config['ui'])
-            return defaults
-    except (json.JSONDecodeError, IOError):
-        return defaults
+          config = json.load(f)
+          if 'defaults' in config:
+            defaults.update(config['defaults'])
+          if 'ui' in config:
+            defaults.update(config['ui'])
+          return defaults
+      except (json.JSONDecodeError, IOError):
+        continue
+    return defaults
 
 # ─── Preset handling ───────────────────────────────────────────────────────────
 def load_preset(preset_name: str, script_dir: str) -> dict:
     """Load preset from lsw-presets folder."""
-    presets_dir = os.path.join(script_dir, "lsw-presets")
-    preset_file = os.path.join(presets_dir, f"{preset_name}.json")
-    
-    if not os.path.exists(preset_file):
-        raise FileNotFoundError(f"Preset '{preset_name}' not found in {presets_dir}")
-    
-    try:
+    preset_paths = [os.path.join(path, f"{preset_name}.json") for path in support_paths(script_dir, "lsw-presets")]
+    for preset_file in preset_paths:
+      if not os.path.exists(preset_file):
+        continue
+      try:
         with open(preset_file, 'r', encoding='utf-8') as f:
-            preset = json.load(f)
-            return preset.get('args', {})
-    except json.JSONDecodeError as e:
+          preset = json.load(f)
+          return preset.get('args', {})
+      except json.JSONDecodeError as e:
         raise ValueError(f"Invalid JSON in preset '{preset_name}': {e}")
+    raise FileNotFoundError(f"Preset '{preset_name}' not found")
 
 def get_available_presets(script_dir: str) -> list:
     """List available presets."""
-    presets_dir = os.path.join(script_dir, "lsw-presets")
-    if not os.path.exists(presets_dir):
-        return []
-    try:
-        return [f[:-5] for f in os.listdir(presets_dir) if f.endswith('.json')]
-    except OSError:
-        return []
+    names = set()
+    for presets_dir in support_paths(script_dir, "lsw-presets"):
+      if not os.path.exists(presets_dir):
+        continue
+      try:
+        names.update(f[:-5] for f in os.listdir(presets_dir) if f.endswith('.json'))
+      except OSError:
+        pass
+    return sorted(names)
 
 # ─── .lswignore file handling ──────────────────────────────────────────────────
-def load_lswignore(script_dir: str) -> tuple:
+def load_lswignore(script_dir: str, local_dir: str = None) -> tuple:
     """Load patterns from .lswignore file. Returns (ignore_patterns, ignore_regex)."""
-    ignore_file = os.path.join(script_dir, ".lswignore")
     patterns = []
     regex_patterns = []
     
-    if not os.path.exists(ignore_file):
-        return patterns, regex_patterns
-    
+    ignore_file = next((path for path in support_paths(script_dir, ".lswignore", local_dir) if os.path.exists(path)), None)
+    if ignore_file is None:
+      return patterns, regex_patterns
     try:
-        with open(ignore_file, 'r', encoding='utf-8') as f:
+      with open(ignore_file, 'r', encoding='utf-8') as f:
             for line in f:
                 line = line.strip()
                 # Skip comments and empty lines
@@ -1173,6 +1223,11 @@ initializeCharts();
 </html>"""
     return html_page
 
+def main():
+    """Run LSW through the installed console command."""
+    import runpy
+    runpy.run_path(__file__, run_name="__main__")
+
 def generate_output(base, output_type, out_file, exts=None, group="none", ignore_dirs=None, ignore_patterns=None, ignore_regex=None, include_dirs=None, include_patterns=None, include_regex=None, max_depth=None, min_size=None, max_size=None, after_date=None, before_date=None, no_browser=False, txt_icons=False):
     """Generate one output format using the same paths as the CLI and GUI."""
     if output_type == "txt":
@@ -1318,7 +1373,7 @@ def run_gui(script_dir: str, config: dict):
           set_status(str(error), "#f87171")
           return
 
-        lswignore_patterns, lswignore_regex = load_lswignore(script_dir)
+        lswignore_patterns, lswignore_regex = load_lswignore(script_dir, base)
         ignore_patterns = list(lswignore_patterns)
         ignore_patterns.extend(split_values(ignore_pattern_field.value) or [])
         ignore_regex = list(lswignore_regex)
@@ -1418,6 +1473,7 @@ def run_gui(script_dir: str, config: dict):
 if __name__ == "__main__":
     # Get script directory for config/preset loading
     script_dir = os.path.dirname(os.path.abspath(__file__))
+    initialize_user_config(script_dir)
     
     # Load config defaults
     config = load_config(script_dir)
@@ -1477,7 +1533,7 @@ if __name__ == "__main__":
     ignore_dirs = {d.strip() for d in args.ignore.split(",")} if args.ignore else None
     
     # Load patterns from .lswignore
-    lswignore_patterns, lswignore_regex = load_lswignore(script_dir)
+    lswignore_patterns, lswignore_regex = load_lswignore(script_dir, base)
     
     # Parse ignore patterns (combine .lswignore with CLI args)
     ignore_patterns = list(lswignore_patterns) if lswignore_patterns else []

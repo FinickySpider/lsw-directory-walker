@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lsw-directory-walker"
+version = "0.1.0"
+description = "LSW: List Walker, an enhanced ls-inspired directory scanner and report generator"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+  "flet>=0.28",
+]
+
+[project.urls]
+Homepage = "https://finickyspider.github.io/lsw-directory-walker"
+Repository = "https://github.com/FinickySpider/lsw-directory-walker"
+Documentation = "https://finickyspider.github.io/lsw-directory-walker"
+
+[project.scripts]
+lsw = "lsw:main"
+
+[tool.setuptools]
+py-modules = ["lsw"]
+
+[tool.setuptools.data-files]
+"lsw-presets" = ["lsw-presets/*.json"]
+"." = ["lsw-config.json", ".lswignore"]

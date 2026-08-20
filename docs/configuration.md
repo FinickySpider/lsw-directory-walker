@@ -50,7 +50,28 @@ The `name` and `description` fields are informational. Only `args` is applied. A
 
 ## `.lswignore`
 
-The script reads `.lswignore` from the script directory. Blank lines and lines beginning with `#` are ignored. Ordinary lines are `fnmatch` glob patterns. Lines beginning with `^` or `|` are compiled as regular expressions.
+The script looks for `.lswignore` in this order:
+
+1. The scanned directory, allowing each application or project to provide its own rules.
+2. The current working directory.
+3. The user configuration directory: `%APPDATA%\\lsw` on Windows or `$XDG_CONFIG_HOME/lsw` on other systems.
+4. The directory containing `lsw.py`, which is useful for a source checkout.
+5. The Python environment prefix, where the packaged fallback is installed by pip.
+
+The first existing file wins. Blank lines and lines beginning with `#` are ignored. Ordinary lines are `fnmatch` glob patterns. Lines beginning with `^` or `|` are compiled as regular expressions.
+
+## User configuration
+
+On first run, LSW creates this directory without overwriting files that already exist:
+
+```text
+%APPDATA%\\lsw\\
+  lsw-config.json
+  .lswignore
+  lsw-presets\\
+```
+
+The bundled defaults and presets are copied there so developers can edit them once and reuse them while scanning many unrelated folders. A `.lswignore` in the scanned folder or current working directory still takes precedence.
 
 Example:
 

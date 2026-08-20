@@ -32,19 +32,21 @@ The launcher is vertically scrollable. The annotated captures below pair each pa
 
 ## Start the launcher
 
-Install the optional GUI dependency once:
+When installing from a package, Flet is installed automatically. For a local checkout, install LSW with:
 
 ```powershell
-python -m pip install -r requirements-gui.txt
+py -m pip install .
 ```
 
 Then run:
 
 ```powershell
-python lsw.py --gui
+lsw --gui
 ```
 
-The normal command-line interface remains available and does not require Flet.
+The normal command-line interface remains available as `lsw`. The package includes Flet so the GUI is ready immediately.
+
+On first run, LSW also creates editable user defaults, presets, and `.lswignore` under `%APPDATA%\\lsw` on Windows. Existing files are never overwritten.
 
 ## Workflow
 
