@@ -1,6 +1,6 @@
-# LSW: Directory Tree and File Inventory
+# LSW: List Walker
 
-LSW is a Python command-line utility that scans a directory and produces a browsable HTML tree, a plain-text tree, or structured exports. It can filter results by name patterns, regular expressions, directory scope, file extension, size, modification date, and traversal depth.
+LSW (List Walker) is a Python command-line utility inspired by `ls` that walks a directory and produces a browsable HTML tree, a plain-text tree, or structured exports. It can filter results by name patterns, regular expressions, directory scope, file extension, size, modification date, and traversal depth.
 
 ## Documentation
 
@@ -13,13 +13,14 @@ This repository includes a Retype documentation site. Run `retype start` from th
 - [Output formats](docs/outputs.md): HTML, TXT, CSV, JSON, JSONL, and Markdown details.
 - [HTML report guide](docs/html-report.md): tree controls, search, grouping, analytics, and browser behavior.
 - [Developer reference](docs/developer-reference.md): function map, execution flow, data contracts, and known implementation notes.
+- [Documentation deployment](docs/deployment.md): publish the Retype site with GitHub Pages.
 
 ## Requirements
 
 - Python 3.8 or newer is recommended.
 - No third-party Python packages are required.
 - The optional `--gui` launcher requires Flet. Install it with `python -m pip install -r requirements-gui.txt`.
-- HTML analytics load amCharts 5 from a public CDN when the report is opened. The tree and most controls still render without that network dependency.
+- HTML analytics are rendered entirely by the generated report, with no external JavaScript dependency or network connection required.
 
 ## Quick start
 

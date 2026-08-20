@@ -1,6 +1,6 @@
-# LSW Documentation
+# LSW: List Walker
 
-LSW is a Python command-line utility for scanning directories and producing browsable trees, file inventories, and export files.
+LSW (List Walker) is a Python command-line utility inspired by `ls` for walking directories and producing browsable trees, file inventories, and export files.
 
 This documentation describes the complete current behavior of the script, including its command-line interface, configuration files, filtering rules, output formats, interactive HTML report, and internal architecture.
 
@@ -12,6 +12,7 @@ This documentation describes the complete current behavior of the script, includ
 - [Output formats](outputs.md): choose between HTML, text, CSV, JSON, JSONL, and Markdown.
 - [HTML report guide](html-report.md): use search, grouping, analytics, path copying, and printing.
 - [Developer reference](developer-reference.md): follow the execution flow and data contracts.
+- [Documentation deployment](deployment.md): publish the Retype site with GitHub Pages.
 
 ## Quick start
 

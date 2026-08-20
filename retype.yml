@@ -1,15 +1,15 @@
 input: docs
 output: .retype
-# Replace this with the real public URL before deployment.
-url: https://example.com/lsw
+# GitHub Pages site URL.
+url: https://finickyspider.github.io/lsw-directory-walker
 
 branding:
-  title: LSW
+  title: "LSW: List Walker"
   label: Documentation
 
 meta:
-  title: " | LSW Documentation"
-  siteName: LSW Documentation
+  title: " | LSW: List Walker"
+  siteName: "LSW: List Walker"
 
 search:
   placeholder: Search LSW documentation
@@ -18,4 +18,7 @@ search:
 showSidebarFilter: true
 
 footer:
-  copyright: "LSW documentation"
+  copyright: "LSW: List Walker documentation"
+
+edit:
+  repo: https://github.com/FinickySpider/lsw-directory-walker

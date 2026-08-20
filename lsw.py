@@ -531,7 +531,7 @@ def export_markdown(items, output_file):
     """Export tree items to Markdown format."""
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
-            f.write("# Directory Tree\n\n")
+            f.write("# LSW: List Walker - Directory Tree\n\n")
             f.write("| Path | Type | Size | Modified |\n")
             f.write("|------|------|------|----------|\n")
             for item in items:
@@ -668,7 +668,7 @@ def build_html_report(target_folder, exts=None, group="none", progress=None, ign
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Directory Tree</title>
+<title>LSW: List Walker - Directory Tree</title>
 <style>
   /* FORCE DARK MODE */
   html, body {{ background:#0d1117 !important; color:#c9d1d9 !important; }}
@@ -821,7 +821,7 @@ def build_html_report(target_folder, exts=None, group="none", progress=None, ign
 </style>
 </head>
 <body>
-<h1>Directory Tree</h1>
+<h1>LSW: List Walker</h1>
 
 <!-- Tab Navigation -->
 <div id="tab-navigation">
@@ -1423,7 +1423,7 @@ if __name__ == "__main__":
     config = load_config(script_dir)
     
     # Setup argument parser
-    parser = argparse.ArgumentParser(description="Generate directory tree (HTML, TXT, CSV, JSON, JSONL, or Markdown)")
+    parser = argparse.ArgumentParser(description="LSW: List Walker - generate directory trees and file inventories")
     parser.add_argument("--gui", action="store_true", help="Open the optional Flet graphical launcher")
     parser.add_argument("--path", default=".", help="Directory to scan")
     parser.add_argument("--preset", "-p", help=f"Load preset (available: {', '.join(get_available_presets(script_dir)) or 'none'})")

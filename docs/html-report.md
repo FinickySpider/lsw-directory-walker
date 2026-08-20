@@ -1,6 +1,6 @@
 # HTML Report Guide
 
-The generated report is a self-contained HTML document except for the amCharts 5 scripts loaded from cdnjs for analytics. It starts in dark mode and includes a light-mode toggle.
+The generated report is a self-contained HTML document, including its analytics rendering code. It starts in dark mode and includes a light-mode toggle.
 
 ## Tree view
 

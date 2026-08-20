@@ -1,6 +1,6 @@
 {
   "version": "4.5.2",
-  "created": "2026-08-20T19:21:35Z",
+  "created": "2026-08-20T19:38:12Z",
   "files": [
     {
       "path": ".nojekyll"
@@ -9,33 +9,36 @@
       "path": "404.html"
     },
     {
-      "path": "assets-copy\\lsw-gui-advanced-annotated.png"
+      "path": "assets-copy\\lsw-gui-advanced-annotated.png",
+      "old": true
     },
     {
-      "path": "assets-copy\\lsw-gui-advanced.png"
+      "path": "assets-copy\\lsw-gui-advanced.png",
+      "old": true
     },
     {
-      "path": "assets-copy\\lsw-gui-top-annotated.png"
+      "path": "assets-copy\\lsw-gui-top-annotated.png",
+      "old": true
     },
     {
-      "path": "assets-copy\\lsw-gui-top.png"
+      "path": "assets-copy\\lsw-gui-top.png",
+      "old": true
     },
     {
-      "path": "assets-copy\\lsw-gui.png"
+      "path": "assets-copy\\lsw-gui.png",
+      "old": true
     },
     {
       "path": "assets\\lsw-gui-advanced-annotated.png"
     },
     {
-      "path": "assets\\lsw-gui-advanced.png",
-      "old": true
+      "path": "assets\\lsw-gui-advanced.png"
     },
     {
       "path": "assets\\lsw-gui-top-annotated.png"
     },
     {
-      "path": "assets\\lsw-gui-top.png",
-      "old": true
+      "path": "assets\\lsw-gui-top.png"
     },
     {
       "path": "assets\\lsw-gui.png"
@@ -47,13 +50,20 @@
       "path": "cli\\index.html"
     },
     {
-      "path": "CNAME"
+      "path": "CNAME",
+      "old": true
     },
     {
       "path": "configuration.md"
     },
     {
       "path": "configuration\\index.html"
+    },
+    {
+      "path": "deployment.md"
+    },
+    {
+      "path": "deployment\\index.html"
     },
     {
       "path": "developer-reference.md"
