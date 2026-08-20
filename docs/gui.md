@@ -2,14 +2,11 @@
 
 LSW includes an optional one-shot graphical launcher built with Flet. It is designed for quickly choosing scan settings, generating one report, and closing rather than running as a permanent dashboard.
 
-The launcher is vertically scrollable. These annotated captures show the complete form across its two sections:
+The launcher is vertically scrollable. The annotated captures below pair each part of the form with its legend so you can read the labels without scrolling back and forth. On narrow screens, Retype stacks each pair vertically.
 
+||| Main settings
 ![LSW graphical launcher main settings](assets/lsw-gui-top-annotated.png)
-
-![LSW graphical launcher advanced settings](assets/lsw-gui-advanced-annotated.png)
-
-### Screenshot legend
-
+||| Main settings legend
 | Marker | UI area | Purpose |
 |---:|---|---|
 | 1 | Folder field | The directory LSW scans. |
@@ -19,11 +16,19 @@ The launcher is vertically scrollable. These annotated captures show the complet
 | 5 | Output file | Destination filename; the correct extension is added when needed. |
 | 6 | Filter fields | Extensions, ignore names, include roots, size limits, and date limits. |
 | 7 | Include explanation | Reminds you that include roots change the scan scope. |
+|||
+
+||| Advanced settings legend
+| Marker | UI area | Purpose |
+|---:|---|---|
 | 8 | Advanced panel | Less-common filters and execution settings. |
 | 9 | Depth and workers | Limits traversal depth and sets the retained worker count. |
 | 10 | Pattern and regex fields | Adds glob or regular-expression include/ignore rules. |
 | 11 | Behavior toggles | Browser opening, TXT icons, and parallel-mode compatibility settings. |
 | 12 | Generate | Starts the scan; controls lock and progress appears while it runs. |
+||| Advanced settings
+![LSW graphical launcher advanced settings](assets/lsw-gui-advanced-annotated.png)
+|||
 
 ## Start the launcher
 
