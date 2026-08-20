@@ -83,12 +83,25 @@ if ($confirm -notmatch '^(y|yes)$') {
     throw 'Release cancelled.'
 }
 
+if (-not $SkipRelease) {
+    if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
+        throw 'GitHub CLI (gh) is required. Install it or rerun with -SkipRelease.'
+    }
+    & gh auth status *> $null
+    if ($LASTEXITCODE -ne 0) {
+        throw 'GitHub CLI is not authenticated. Run gh auth login, then rerun the release.'
+    }
+}
+
 $replacement = "version = `"$next`""
 $content = Get-Content 'pyproject.toml' -Raw
 $content = [regex]::Replace($content, 'version\s*=\s*"\d+\.\d+\.\d+"', $replacement, 1)
 Set-Content 'pyproject.toml' $content -NoNewline
 
 try {
+    if (Test-Path 'dist') {
+        Remove-Item 'dist\*' -Recurse -Force
+    }
     Invoke-CheckedCommand 'python' @('-m', 'py_compile', 'lsw.py') 'Compile lsw.py'
     Invoke-CheckedCommand 'retype' @('build') 'Build Retype documentation'
     Invoke-CheckedCommand 'py' @('-m', 'build') 'Build Python distributions'
@@ -105,9 +118,6 @@ try {
     }
 
     if (-not $SkipRelease) {
-        if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
-            throw 'GitHub CLI (gh) is required to create the release. Install it or rerun with -SkipRelease.'
-        }
         Invoke-CheckedCommand 'gh' @('release', 'create', $tag, '--target', 'main', '--generate-notes', '--title', "LSW $tag") 'Create GitHub Release'
     }
 
