@@ -1,3 +1,9 @@
+---
+label: Filtering and Traversal
+icon: filter
+order: 8900
+---
+
 # Filtering and Traversal
 
 LSW applies filters while walking the directory tree. The scan functions share the same broad rules, with small output-specific differences documented in [Output formats](outputs.md).

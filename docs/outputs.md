@@ -1,3 +1,9 @@
+---
+label: Output Formats
+icon: file
+order: 8800
+---
+
 # Output Formats
 
 Every output format can be printed to the terminal with `--stdout` while also being saved with `--out`:

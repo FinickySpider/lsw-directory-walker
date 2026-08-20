@@ -1,8 +1,14 @@
+---
+label: Developer Reference
+icon: code
+order: 7000
+---
+
 # Developer Reference
 
 ## Module responsibilities
 
-`lsw.py` is intentionally self-contained and has no runtime package dependencies.
+`lsw.py` contains the scanner and report logic. The published package also includes Flet for the graphical launcher.
 
 | Area | Main functions | Responsibility |
 |---|---|---|

@@ -1,3 +1,9 @@
+---
+label: Installation
+icon: download
+order: 9900
+---
+
 # Installation
 
 LSW: List Walker is published on PyPI as `lsw-directory-walker`.

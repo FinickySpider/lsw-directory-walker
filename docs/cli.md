@@ -1,3 +1,9 @@
+---
+label: CLI Reference
+icon: terminal
+order: 9800
+---
+
 # CLI Reference
 
 ## Invocation

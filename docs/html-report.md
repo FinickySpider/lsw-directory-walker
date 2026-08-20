@@ -1,3 +1,9 @@
+---
+label: HTML Report Guide
+icon: browser
+order: 8600
+---
+
 # HTML Report Guide
 
 The generated report is a self-contained HTML document, including its analytics rendering code. It starts in dark mode and includes a light-mode toggle.

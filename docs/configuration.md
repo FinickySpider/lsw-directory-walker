@@ -1,3 +1,9 @@
+---
+label: Configuration and Presets
+icon: gear
+order: 9000
+---
+
 # Configuration, Presets, and Ignore Rules
 
 ## `lsw-config.json`

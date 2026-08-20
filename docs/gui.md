@@ -1,3 +1,9 @@
+---
+label: Graphical Launcher
+icon: device-desktop
+order: 9700
+---
+
 # Graphical Launcher
 
 LSW includes a one-shot graphical launcher built with Flet. It is designed for quickly choosing scan settings, generating one report, and closing rather than running as a permanent dashboard.

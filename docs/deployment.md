@@ -1,3 +1,9 @@
+---
+label: Documentation Deployment
+icon: rocket
+order: 6000
+---
+
 # Documentation Deployment
 
 The Retype source files live in `docs/`, while Retype generates the publishable static website into `.retype/`.

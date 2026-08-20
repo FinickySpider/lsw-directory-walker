@@ -1,3 +1,9 @@
+---
+label: Releasing LSW
+icon: tag
+order: 5900
+---
+
 # Releasing LSW
 
 The current public release is `0.1.0` on [PyPI](https://pypi.org/project/lsw-directory-walker/).

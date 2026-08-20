@@ -1,3 +1,9 @@
+---
+label: stdout and stderr Integration
+icon: broadcast
+order: 8700
+---
+
 # stdout and stderr Integration
 
 LSW can be used as a library-like command-line component inside another application. The recommended integration mode is `--stdout-only`, which returns the serialized result through stdout without creating a file.
