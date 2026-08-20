@@ -352,7 +352,7 @@ def generate_text_tree(dir_path=".", prefix="", ignore_dirs=None, ignore_pattern
         connector = "└── " if i == len(entries) - 1 else "├── "
         
         try:
-            if os.path.isdir(path) and entry not in ignore_dirs:
+            if os.path.isdir(path) and not os.path.islink(path) and entry not in ignore_dirs:
                 # At root level (depth=0), apply include_dirs whitelist (folder-level filtering)
                 if current_depth == 0 and include_dirs and entry not in include_dirs:
                     continue
@@ -410,6 +410,7 @@ def generate_html_tree(dir_path: str, prefix: str = "", exts=None, progress=None
         is_last = (i == len(entries) - 1)
         connector = "└── " if is_last else "├── "
         safe = html.escape(entry)
+        safe_path = html.escape(full_path, quote=True)
         
         try:
             mtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.stat(full_path).st_mtime))
@@ -418,7 +419,7 @@ def generate_html_tree(dir_path: str, prefix: str = "", exts=None, progress=None
             mtime = "N/A"
             mtime_ts = None
         
-        if os.path.isdir(full_path):
+        if os.path.isdir(full_path) and not os.path.islink(full_path):
             if entry in ignore_dirs:
                 continue
             # At root level (depth=0), apply include_dirs whitelist
@@ -446,7 +447,7 @@ def generate_html_tree(dir_path: str, prefix: str = "", exts=None, progress=None
                 "<details>"
                 f'<summary class="tree-line dir-line">{prefix}'
                 f'<span class="connector">{connector}</span>'
-                f'<span class="dir clickable" data-path="{full_path}" '
+                f'<span class="dir clickable" data-path="{safe_path}" '
                 f'data-size="{size_label}" data-mtime="{mtime}" '
                 f'title="Size: {size_label}\\nModified: {mtime}">{icon} {safe}</span></summary>'
                 "<div class=\"tree\">"
@@ -480,7 +481,7 @@ def generate_html_tree(dir_path: str, prefix: str = "", exts=None, progress=None
             lines.append(
                 f'<div class="tree-line file-line">{prefix}'
                 f'<span class="connector">{connector}</span>'
-                f'<span class="file clickable" data-path="{full_path}" '
+                f'<span class="file clickable" data-path="{safe_path}" '
                 f'data-size="{size_label}" data-mtime="{mtime}" '
                 f'title="Size: {size_label}\\nModified: {mtime}">{icon} {safe}</span></div>'
             )
@@ -519,13 +520,13 @@ def collect_tree_items(dir_path: str, ignore_dirs=None, ignore_patterns=None, ig
             item = {
                 'path': full_path,
                 'name': entry,
-                'type': 'dir' if os.path.isdir(full_path) else 'file',
+                'type': 'dir' if os.path.isdir(full_path) and not os.path.islink(full_path) else 'file',
                 'size': stat.st_size,
                 'mtime': stat.st_mtime,
                 'mtime_str': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stat.st_mtime)),
             }
             
-            if os.path.isdir(full_path):
+            if os.path.isdir(full_path) and not os.path.islink(full_path):
                 if entry not in ignore_dirs:
                     # At root level (depth=0), apply include_dirs whitelist
                     if current_depth == 0 and include_dirs and entry not in include_dirs:
@@ -747,7 +748,7 @@ def build_html_report(target_folder, exts=None, group="none", progress=None, ign
     # Generate analytics data for charts
     items = collect_tree_items(cwd, ignore_dirs=ignore_dirs, ignore_patterns=ignore_patterns, ignore_regex=ignore_regex, include_dirs=include_dirs, include_patterns=include_patterns, include_regex=include_regex, max_depth=max_depth, exts=exts, min_size=min_size, max_size=max_size, after_date=after_date, before_date=before_date)
     analytics = generate_analytics_data(items, top_n=20, root_path=cwd)
-    analytics_json = json.dumps(analytics)
+    analytics_json = json.dumps(analytics).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
     html_page = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -933,7 +934,7 @@ def build_html_report(target_folder, exts=None, group="none", progress=None, ign
 <div id="breadcrumb">Path: {cwd}</div>
 <div class="tree" id="tree-container">
 <details>
-<summary class="tree-line dir-line"><span class="connector">└── </span><span class="dir clickable" data-path="{cwd}" data-size="{root_size}" data-mtime="{root_mtime}" title="Size: {root_size}\\nModified: {root_mtime}">{root}</span></summary>
+<summary class="tree-line dir-line"><span class="connector">└── </span><span class="dir clickable" data-path="{html.escape(cwd, quote=True)}" data-size="{root_size}" data-mtime="{root_mtime}" title="Size: {root_size}\\nModified: {root_mtime}">{root}</span></summary>
 <div class="tree">{tree_html}</div>
 </details>
 </div>
