@@ -21,6 +21,8 @@ The GUI is a one-shot desktop window. It collects scan settings, runs the same g
 
 See the full [Graphical Launcher](gui.md) guide for the layout, filter behavior, progress state, and standalone HTML workflow.
 
+See [stdout and stderr integration](streams.md) for application, AI-tool, and pipeline patterns.
+
 `--path` is the directory to scan and defaults to the current working directory. Relative paths are resolved by the operating system from the shell's current directory.
 
 ## Options at a glance

@@ -14,6 +14,8 @@ lsw --type json --stdout-only
 
 For application integration, prefer `--stdout-only` and parse stdout. JSON produces one complete JSON document; JSONL produces one object per line. Diagnostic messages are kept on stderr.
 
+See the dedicated [stdout and stderr integration](streams.md) guide for subprocess examples and stream contracts.
+
 ## HTML
 
 HTML is the default. It contains an interactive tree, search, grouping, expand/collapse controls, path copying, printing, a theme toggle, and analytics. See [HTML report guide](html-report.md).

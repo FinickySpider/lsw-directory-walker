@@ -17,6 +17,7 @@ This documentation describes the complete current behavior of the script, includ
 - [Configuration and presets](configuration.md): customize defaults and reusable scan profiles.
 - [Filtering and traversal](filtering.md): understand how include, ignore, size, date, and depth rules combine.
 - [Output formats](outputs.md): choose between HTML, text, CSV, JSON, JSONL, and Markdown.
+- [stdout and stderr integration](streams.md): consume clean serialized output from applications and pipelines.
 - [HTML report guide](html-report.md): use search, grouping, analytics, path copying, and printing.
 - [Developer reference](developer-reference.md): follow the execution flow and data contracts.
 - [Documentation deployment](deployment.md): publish the Retype site with GitHub Pages.
