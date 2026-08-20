@@ -199,7 +199,7 @@ The parent directory must already exist.
 
 ### `--stdout`
 
-Prints generated output to the terminal while still saving the file specified by `--out`. This is useful when another application or shell pipeline needs to consume the result immediately.
+Prints generated output to the terminal while still saving the file specified by `--out`. This is supported for HTML, TXT, CSV, JSON, JSONL, and Markdown, and is useful when another application or shell pipeline needs to consume the result immediately.
 
 ```powershell
 lsw --path . --type json --stdout --out inventory.json
@@ -217,7 +217,7 @@ Prints the generated output to stdout without creating the output file. This is 
 lsw --path . --type json --stdout-only
 ```
 
-`--stdout-only` implies `--stdout`. For JSON, stdout contains one complete JSON document and no status messages. For JSONL, it contains one JSON object per line. Errors and diagnostic messages are sent to stderr.
+`--stdout-only` implies `--stdout`; the difference is that `--stdout` also saves a file while `--stdout-only` does not. Both modes support HTML, TXT, CSV, JSON, JSONL, and Markdown. For JSON, stdout contains one complete JSON document and no status messages. For JSONL, it contains one JSON object per line. Errors and diagnostic messages are sent to stderr.
 
 ## Data flow for applications
 

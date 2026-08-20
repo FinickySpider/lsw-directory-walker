@@ -1547,6 +1547,9 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     stdout_enabled = args.stdout or args.stdout_only
+    if stdout_enabled:
+      sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+      sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
     if args.gui:
       run_gui(script_dir, config)
