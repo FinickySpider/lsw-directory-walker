@@ -1,0 +1,338 @@
+{
+  "version": "4.5.2",
+  "created": "2026-08-20T19:21:35Z",
+  "files": [
+    {
+      "path": ".nojekyll"
+    },
+    {
+      "path": "404.html"
+    },
+    {
+      "path": "assets-copy\\lsw-gui-advanced-annotated.png"
+    },
+    {
+      "path": "assets-copy\\lsw-gui-advanced.png"
+    },
+    {
+      "path": "assets-copy\\lsw-gui-top-annotated.png"
+    },
+    {
+      "path": "assets-copy\\lsw-gui-top.png"
+    },
+    {
+      "path": "assets-copy\\lsw-gui.png"
+    },
+    {
+      "path": "assets\\lsw-gui-advanced-annotated.png"
+    },
+    {
+      "path": "assets\\lsw-gui-advanced.png",
+      "old": true
+    },
+    {
+      "path": "assets\\lsw-gui-top-annotated.png"
+    },
+    {
+      "path": "assets\\lsw-gui-top.png",
+      "old": true
+    },
+    {
+      "path": "assets\\lsw-gui.png"
+    },
+    {
+      "path": "cli.md"
+    },
+    {
+      "path": "cli\\index.html"
+    },
+    {
+      "path": "CNAME"
+    },
+    {
+      "path": "configuration.md"
+    },
+    {
+      "path": "configuration\\index.html"
+    },
+    {
+      "path": "developer-reference.md"
+    },
+    {
+      "path": "developer-reference\\index.html"
+    },
+    {
+      "path": "filtering.md"
+    },
+    {
+      "path": "filtering\\index.html"
+    },
+    {
+      "path": "gui.md"
+    },
+    {
+      "path": "gui\\index.html"
+    },
+    {
+      "path": "html-report.md"
+    },
+    {
+      "path": "html-report\\index.html"
+    },
+    {
+      "path": "index.html"
+    },
+    {
+      "path": "llms.txt"
+    },
+    {
+      "path": "outputs.md"
+    },
+    {
+      "path": "outputs\\index.html"
+    },
+    {
+      "path": "readme.md"
+    },
+    {
+      "path": "resources\\css\\katex.css"
+    },
+    {
+      "path": "resources\\css\\retype.css"
+    },
+    {
+      "path": "resources\\fonts\\Inter-italic-latin-var.woff2"
+    },
+    {
+      "path": "resources\\fonts\\Inter-roman-latin-var.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_AMS-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_AMS-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_AMS-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Caligraphic-Bold.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Caligraphic-Bold.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Caligraphic-Bold.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Caligraphic-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Caligraphic-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Caligraphic-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Fraktur-Bold.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Fraktur-Bold.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Fraktur-Bold.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Fraktur-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Fraktur-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Fraktur-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-Bold.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-Bold.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-Bold.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-BoldItalic.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-BoldItalic.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-BoldItalic.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-Italic.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-Italic.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-Italic.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Main-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Math-BoldItalic.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Math-BoldItalic.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Math-BoldItalic.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Math-Italic.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Math-Italic.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Math-Italic.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_SansSerif-Bold.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_SansSerif-Bold.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_SansSerif-Bold.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_SansSerif-Italic.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_SansSerif-Italic.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_SansSerif-Italic.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_SansSerif-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_SansSerif-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_SansSerif-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Script-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Script-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Script-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size1-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size1-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size1-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size2-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size2-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size2-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size3-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size3-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size3-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size4-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size4-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Size4-Regular.woff2"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Typewriter-Regular.ttf"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Typewriter-Regular.woff"
+    },
+    {
+      "path": "resources\\fonts\\KaTeX_Typewriter-Regular.woff2"
+    },
+    {
+      "path": "resources\\js\\config.js"
+    },
+    {
+      "path": "resources\\js\\instagram.js"
+    },
+    {
+      "path": "resources\\js\\katex.js"
+    },
+    {
+      "path": "resources\\js\\lunr.js"
+    },
+    {
+      "path": "resources\\js\\mermaid.js"
+    },
+    {
+      "path": "resources\\js\\prism.js"
+    },
+    {
+      "path": "resources\\js\\retype.js"
+    },
+    {
+      "path": "resources\\js\\search.json"
+    },
+    {
+      "path": "resources\\katex.js.LICENSE.txt"
+    },
+    {
+      "path": "resources\\lunr.js.LICENSE.txt"
+    },
+    {
+      "path": "resources\\mermaid.js.LICENSE.txt"
+    },
+    {
+      "path": "resources\\prism.js.LICENSE.txt"
+    },
+    {
+      "path": "resources\\retype.js.LICENSE.txt"
+    },
+    {
+      "path": "resources\\retype.LICENSE.txt"
+    },
+    {
+      "path": "robots.txt"
+    },
+    {
+      "path": "sitemap.xml"
+    }
+  ]
+}

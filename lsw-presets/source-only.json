@@ -1,0 +1,9 @@
+{
+  "name": "source-only",
+  "description": "Show only source code files",
+  "args": {
+    "ext": ".py,.js,.ts,.java,.cpp,.c,.go,.rs",
+    "ignore_pattern": "*.min.*,*.compiled.*",
+    "type": "html"
+  }
+}

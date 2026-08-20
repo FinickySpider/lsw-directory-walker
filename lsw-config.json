@@ -1,0 +1,13 @@
+{
+  "defaults": {
+    "type": "html",
+    "max_depth": null,
+    "parallel": true,
+    "parallel_workers": 4,
+    "no_browser": false
+  },
+  "ui": {
+    "theme": "dark",
+    "show_hidden": false
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "large-files",
+  "description": "Find files larger than 5MB",
+  "args": {
+    "min_size": "5MB",
+    "type": "csv"
+  }
+}

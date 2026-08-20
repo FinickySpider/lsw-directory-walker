@@ -1,0 +1,21 @@
+input: docs
+output: .retype
+# Replace this with the real public URL before deployment.
+url: https://example.com/lsw
+
+branding:
+  title: LSW
+  label: Documentation
+
+meta:
+  title: " | LSW Documentation"
+  siteName: LSW Documentation
+
+search:
+  placeholder: Search LSW documentation
+  mode: full
+
+showSidebarFilter: true
+
+footer:
+  copyright: "LSW documentation"

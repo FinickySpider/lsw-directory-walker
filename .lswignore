@@ -1,0 +1,236 @@
+# Global LSW ignore patterns
+# Glob patterns and regex supported
+# Lines starting with # are comments
+
+# Version control
+.git
+.svn
+.hg
+
+# Build artifacts
+__pycache__
+*.pyc
+*.pyo
+*.class
+node_modules
+dist
+build
+target
+*.egg-info
+
+# Python tooling and environments
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.hypothesis
+.tox
+.nox
+.venv
+venv
+env
+ENV
+pip-wheel-metadata
+*.egg-info
+*.whl
+*.py[cod]
+*$py.class
+celerybeat-schedule
+.coverage
+htmlcov
+
+# JavaScript, TypeScript, Node, and frontend tooling
+.npm
+.yarn
+.pnp
+.pnp.*
+.parcel-cache
+.cache
+.turbo
+.nx
+.angular
+.svelte-kit
+.nuxt
+.next
+.vite
+.webpack
+.eslintcache
+.stylelintcache
+.tsbuildinfo
+coverage
+storybook-static
+*.map
+*.min.js
+*.min.css
+*.bundle.js
+*.chunk.js
+
+# Java, Kotlin, Gradle, and Maven
+.gradle
+.mvn
+out
+bin
+classes
+*.war
+*.ear
+*.jar
+*.class
+hs_err_pid*
+
+# .NET, C#, F#, and Visual Studio
+.vs
+packages
+TestResults
+BenchmarkDotNet.Artifacts
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.nupkg
+*.snupkg
+*.pdb
+*.dll
+*.exe
+*.obj
+*.lib
+*.ilk
+*.tlog
+*.cache
+
+# C, C++, Objective-C, and native build systems
+CMakeFiles
+CMakeCache.txt
+cmake-build-*
+compile_commands.json
+*.o
+*.obj
+*.lo
+*.la
+*.so
+*.dylib
+*.a
+*.s
+*.gch
+*.pch
+*.gcda
+*.gcno
+*.gcov
+
+# Go
+vendor
+*.test
+*.out
+
+# Rust
+target
+*.rlib
+
+# Swift, Xcode, and Apple platforms
+DerivedData
+build
+*.xcuserstate
+*.xcworkspace/xcuserdata
+*.xcodeproj/xcuserdata
+Pods
+.build
+.swiftpm
+
+# Android and mobile tooling
+.android
+.gradle
+captures
+externalNativeBuild
+*.apk
+*.aab
+*.dex
+*.iml
+local.properties
+
+# PHP, Ruby, and web frameworks
+vendor
+.bundle
+.ruby-version
+.yardoc
+_yardoc
+doc/
+tmp/
+log/
+*.gem
+
+# Databases, local services, and generated data
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+*.local
+*.bak
+*.backup
+
+# Test, coverage, profiling, and benchmark output
+.nyc_output
+.jest-cache
+.pytest_cache
+test-results
+test-results.xml
+coverage.xml
+coverage.html
+lcov.info
+*.prof
+*.profraw
+*.profdata
+*.trace
+*.benchmark
+
+# Documentation and static-site output
+.docusaurus
+.jekyll-cache
+.jekyll-metadata
+_site
+.sass-cache
+.retype
+public
+site
+docs/_build
+docs/.buildinfo
+
+# Containers, infrastructure, and local cloud tooling
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+.serverless
+.aws-sam
+.chalice
+.pulumi
+.docker
+docker-compose.override.yml
+
+# Package manager and tool logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+*.log.*
+
+# IDE/Editor
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Cache
+*.cache
+.cache
+*.tmp
+
+# Logs
+*.log

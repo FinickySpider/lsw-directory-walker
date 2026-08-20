@@ -1,0 +1,65 @@
+# Configuration, Presets, and Ignore Rules
+
+## `lsw-config.json`
+
+The script looks for this file beside `lsw.py`. Missing or invalid JSON falls back to built-in defaults. Recognized values are merged from `defaults` and `ui` objects:
+
+```json
+{
+  "defaults": {
+    "type": "html",
+    "max_depth": null,
+    "parallel": true,
+    "parallel_workers": 4,
+    "no_browser": false
+  },
+  "ui": {
+    "theme": "dark",
+    "show_hidden": false
+  }
+}
+```
+
+The `type`, `parallel`, `parallel_workers`, `theme`, and `no_browser` keys are loaded. `max_depth` is present in the sample configuration but is not used as the argparse default. `show_hidden` is currently unused. The parallel settings are parsed but the current scanner does not create a thread pool.
+
+Command-line arguments are parsed after config loading. A preset is then loaded, and values are copied onto the parsed argument namespace only when the current value is `None`. In practice, argparse defaults such as `--type html`, `--out tree_output.html`, and `--group none` can take precedence over corresponding preset values.
+
+## Presets
+
+Presets live in `lsw-presets/` beside the script. Each file is named `<name>.json` and has an `args` object:
+
+```json
+{
+  "name": "source-only",
+  "description": "Show only source code files",
+  "args": {
+    "ext": ".py,.js,.ts",
+    "ignore_pattern": "*.min.*,*.compiled.*",
+    "type": "html"
+  }
+}
+```
+
+Run a preset with:
+
+```powershell
+python lsw.py --preset source-only --path .
+```
+
+The `name` and `description` fields are informational. Only `args` is applied. Available preset names are shown in the `--help` text.
+
+## `.lswignore`
+
+The script reads `.lswignore` from the script directory. Blank lines and lines beginning with `#` are ignored. Ordinary lines are `fnmatch` glob patterns. Lines beginning with `^` or `|` are compiled as regular expressions.
+
+Example:
+
+```text
+node_modules
+*.pyc
+^test_.*
+```
+
+Ignore rules are matched against the entry name, not a normalized full relative path. Invalid regex lines in `.lswignore` are silently skipped. CLI ignore patterns and regexes are added to the loaded rules.
+
+The repository's sample file excludes version-control directories, build output, caches, logs, and common editor artifacts.

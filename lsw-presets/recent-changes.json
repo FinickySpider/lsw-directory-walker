@@ -1,0 +1,8 @@
+{
+  "name": "recent-changes",
+  "description": "Show files modified in last 7 days",
+  "args": {
+    "modified_after": "2025-10-15",
+    "type": "markdown"
+  }
+}

@@ -1,0 +1,117 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+coverage.json
+.pyre/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# Packaging and build output
+build/
+dist/
+.eggs/
+*.egg
+*.egg-info/
+pip-wheel-metadata/
+*.whl
+
+# Generated LSW reports and temporary exports
+tree_output.html
+tree_output.txt
+tree_output.csv
+tree_output.json
+tree_output.jsonl
+tree_output.md
+*.lsw-output.html
+*.lsw-output.txt
+*.lsw-output.csv
+*.lsw-output.json
+*.lsw-output.jsonl
+*.lsw-output.md
+
+# Retype generated website
+.retype/
+
+# Flet and local application state
+.flet/
+.flet-cache/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs and temporary files
+*.log
+*.log.*
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors and IDEs
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.iml
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Test and tool output
+.pytest_cache/
+.nyc_output/
+test-results/
+TestResults/
+benchmark-results/
+
+# Frontend and package-manager caches, if used alongside the Python app
+node_modules/
+.npm/
+.yarn/
+.pnpm-store/
+.parcel-cache/
+.next/
+.nuxt/
+.vite/
+.turbo/
+.cache/
+
+# Local databases and runtime state
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
