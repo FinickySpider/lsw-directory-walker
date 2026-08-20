@@ -50,6 +50,7 @@ tree_output.md
 
 # Retype generated website
 .retype/
+retype.manifest
 
 # Flet and local application state
 .flet/
