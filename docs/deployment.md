@@ -10,7 +10,17 @@ Use one of these approaches instead:
 
 ### Recommended: GitHub Actions
 
-Configure GitHub Pages to use **GitHub Actions**, then build the site and deploy the `.retype/` directory from a workflow. This keeps the Markdown source in `docs/` and publishes the generated output separately.
+This repository includes `.github/workflows/retype-pages.yml`. Configure GitHub Pages to use **GitHub Actions**, then the workflow will build the site and deploy the `.retype/` directory automatically whenever changes are pushed to `main`. It can also be started manually from the Actions tab with **Run workflow**.
+
+The workflow:
+
+1. Checks out the repository.
+2. Installs Node.js and the Retype CLI.
+3. Runs `retype build`.
+4. Uploads `.retype/` as the Pages artifact.
+5. Deploys that artifact to the `github-pages` environment.
+
+In the repository settings, open **Settings -> Pages** and set **Source** to **GitHub Actions**. Do not select **Deploy from a branch** with the `/docs` folder for this layout.
 
 From a local checkout, the equivalent build is:
 
@@ -43,3 +53,7 @@ retype build
 ```
 
 Retype should report the generated output directory as `.retype/` and include all documentation pages and image assets.
+
+## Workflow permissions
+
+The workflow requests `contents: read`, `pages: write`, and `id-token: write`, which are the permissions required by the official GitHub Pages artifact and deployment actions. The repository does not need a personal access token or deployment secret for this setup.

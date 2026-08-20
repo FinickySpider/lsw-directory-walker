@@ -15,6 +15,8 @@ This repository includes a Retype documentation site. Run `retype start` from th
 - [Developer reference](docs/developer-reference.md): function map, execution flow, data contracts, and known implementation notes.
 - [Documentation deployment](docs/deployment.md): publish the Retype site with GitHub Pages.
 
+Documentation deployment is automated by `.github/workflows/retype-pages.yml`. Set the repository's GitHub Pages source to **GitHub Actions**.
+
 ## Requirements
 
 - Python 3.8 or newer is recommended.
