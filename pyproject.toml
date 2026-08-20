@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lsw-directory-walker"
-version = "0.1.0"
+version = "0.1.1"
 description = "LSW: List Walker, an enhanced ls-inspired directory scanner and report generator"
 readme = "README.md"
 requires-python = ">=3.8"
