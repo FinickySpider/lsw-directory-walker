@@ -1,5 +1,19 @@
 # Output Formats
 
+Every output format can be printed to the terminal with `--stdout` while also being saved with `--out`:
+
+```powershell
+lsw --type json --stdout --out inventory.json
+```
+
+Use `--stdout-only` when no file should be created:
+
+```powershell
+lsw --type json --stdout-only
+```
+
+For application integration, prefer `--stdout-only` and parse stdout. JSON produces one complete JSON document; JSONL produces one object per line. Diagnostic messages are kept on stderr.
+
 ## HTML
 
 HTML is the default. It contains an interactive tree, search, grouping, expand/collapse controls, path copying, printing, a theme toggle, and analytics. See [HTML report guide](html-report.md).

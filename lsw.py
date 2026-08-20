@@ -9,6 +9,7 @@ import re
 import csv
 import json
 import shutil
+import io
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 from mimetypes import guess_extension, types_map
@@ -24,6 +25,14 @@ def safe_print(message):
         # Replace characters unsupported by legacy Windows code pages.
         safe_msg = str(message).encode('ascii', errors='replace').decode('ascii')
         print(safe_msg)
+
+def safe_error(message):
+    """Print a diagnostic message to stderr with Windows-safe encoding."""
+    try:
+        print(message, file=sys.stderr)
+    except UnicodeEncodeError:
+        safe_msg = str(message).encode('ascii', errors='replace').decode('ascii')
+        print(safe_msg, file=sys.stderr)
 
 # ─── MIME type icon mapping ────────────────────────────────────────────────────
 MIME_ICONS = {
@@ -546,7 +555,7 @@ def collect_tree_items(dir_path: str, ignore_dirs=None, ignore_patterns=None, ig
     
     return items
 
-def export_csv(items, output_file):
+def export_csv(items, output_file, quiet=False):
     """Export tree items to CSV."""
     try:
         with open(output_file, 'w', newline='', encoding='utf-8') as f:
@@ -554,30 +563,33 @@ def export_csv(items, output_file):
             writer.writeheader()
             for item in items:
                 writer.writerow({k: item[k] for k in writer.fieldnames})
-        safe_print(f"✅ CSV export saved to {output_file}")
+        if not quiet:
+          safe_print(f"✅ CSV export saved to {output_file}")
     except Exception as e:
-        safe_print(f"❌ Error exporting CSV: {e}")
+        safe_error(f"❌ Error exporting CSV: {e}")
 
-def export_json(items, output_file):
+def export_json(items, output_file, quiet=False):
     """Export tree items to JSON."""
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(items, f, indent=2, default=str)
-        safe_print(f"✅ JSON export saved to {output_file}")
+        if not quiet:
+          safe_print(f"✅ JSON export saved to {output_file}")
     except Exception as e:
-        safe_print(f"❌ Error exporting JSON: {e}")
+        safe_error(f"❌ Error exporting JSON: {e}")
 
-def export_jsonl(items, output_file):
+def export_jsonl(items, output_file, quiet=False):
     """Export tree items to JSONL (one JSON object per line)."""
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
             for item in items:
                 f.write(json.dumps(item, default=str) + '\n')
-        safe_print(f"✅ JSONL export saved to {output_file}")
+        if not quiet:
+          safe_print(f"✅ JSONL export saved to {output_file}")
     except Exception as e:
-        safe_print(f"❌ Error exporting JSONL: {e}")
+        safe_error(f"❌ Error exporting JSONL: {e}")
 
-def export_markdown(items, output_file):
+def export_markdown(items, output_file, quiet=False):
     """Export tree items to Markdown format."""
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
@@ -587,9 +599,31 @@ def export_markdown(items, output_file):
             for item in items:
                 size_str = human_size(item['size']) if item['type'] == 'file' else '-'
                 f.write(f"| `{item['path']}` | {item['type']} | {size_str} | {item['mtime_str']} |\n")
-        safe_print(f"✅ Markdown export saved to {output_file}")
+        if not quiet:
+            safe_print(f"✅ Markdown export saved to {output_file}")
     except Exception as e:
-        safe_print(f"❌ Error exporting Markdown: {e}")
+        safe_error(f"❌ Error exporting Markdown: {e}")
+
+def items_to_csv(items) -> str:
+    """Serialize inventory records to CSV text."""
+    output = io.StringIO(newline="")
+    writer = csv.DictWriter(output, fieldnames=['path', 'name', 'type', 'size', 'mtime_str'])
+    writer.writeheader()
+    for item in items:
+      writer.writerow({key: item[key] for key in writer.fieldnames})
+    return output.getvalue()
+
+def items_to_markdown(items) -> str:
+    """Serialize inventory records to Markdown text."""
+    lines = ["# LSW: List Walker - Directory Tree", "", "| Path | Type | Size | Modified |", "|------|------|------|----------|"]
+    for item in items:
+      size_str = human_size(item['size']) if item['type'] == 'file' else '-'
+      lines.append(f"| `{item['path']}` | {item['type']} | {size_str} | {item['mtime_str']} |")
+    return "\n".join(lines) + "\n"
+
+def items_to_jsonl(items) -> str:
+    """Serialize inventory records to JSONL text."""
+    return "".join(json.dumps(item, default=str) + "\n" for item in items)
 
 # ─── Analytics Data Generation ────────────────────────────────────────────────
 def generate_analytics_data(items, top_n=20, root_path=None):
@@ -1496,6 +1530,8 @@ if __name__ == "__main__":
     parser.add_argument("--modified-after", help="Only files modified after date (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)")
     parser.add_argument("--modified-before", help="Only files modified before date (YYYY-MM-DD or YYYY-MM-DD HH:MM:SS)")
     parser.add_argument("--out", default="tree_output.html", help="Output file")
+    parser.add_argument("--stdout", action="store_true", help="Print generated output to the terminal as well as saving the file")
+    parser.add_argument("--stdout-only", action="store_true", help="Print generated output without saving a file")
     parser.add_argument("--no-browser", action="store_true", default=config.get("no_browser", False), help="Skip opening browser for HTML output")
     parser.add_argument("--txt-icons", action="store_true", help="Show MIME icons in TXT output (disabled by default)")
     parser.add_argument("--group", choices=["none","type","prefix"], default="none",
@@ -1510,6 +1546,7 @@ if __name__ == "__main__":
                         help="Number of parallel workers (default: 4)")
     
     args = parser.parse_args()
+    stdout_enabled = args.stdout or args.stdout_only
 
     if args.gui:
       run_gui(script_dir, config)
@@ -1523,9 +1560,9 @@ if __name__ == "__main__":
             for key, value in preset_args.items():
                 if not hasattr(args, key) or getattr(args, key) is None:
                     setattr(args, key, value)
-            safe_print(f"✅ Loaded preset: {args.preset}")
+            (safe_error(f"✅ Loaded preset: {args.preset}") if stdout_enabled else safe_print(f"✅ Loaded preset: {args.preset}"))
         except (FileNotFoundError, ValueError) as e:
-            safe_print(f"❌ {e}")
+            safe_error(f"❌ {e}")
             exit(1)
 
     base = args.path
@@ -1547,7 +1584,7 @@ if __name__ == "__main__":
         try:
             ignore_regex.extend([re.compile(pattern.strip()) for pattern in args.ignore_regex.split(",")])
         except re.error as e:
-            safe_print(f"❌ Invalid regex pattern: {e}")
+            safe_error(f"❌ Invalid regex pattern: {e}")
             exit(1)
     ignore_regex = ignore_regex if ignore_regex else None
     
@@ -1563,7 +1600,7 @@ if __name__ == "__main__":
         try:
             include_regex = [re.compile(pattern.strip()) for pattern in args.include_regex.split(",")]
         except re.error as e:
-            safe_print(f"❌ Invalid include regex pattern: {e}")
+            safe_error(f"❌ Invalid include regex pattern: {e}")
             exit(1)
     
     max_depth = args.max_depth
@@ -1581,35 +1618,55 @@ if __name__ == "__main__":
         if args.modified_before:
             before_date = parse_date(args.modified_before)
     except ValueError as e:
-        safe_print(f"❌ {e}")
+        safe_error(f"❌ {e}")
         exit(1)
 
     if args.type == "txt":
         out_file = args.out if args.out.lower().endswith(".txt") else os.path.splitext(args.out)[0] + ".txt"
         txt_content = ".\n" + generate_text_tree(base, ignore_dirs=ignore_dirs, ignore_patterns=ignore_patterns, ignore_regex=ignore_regex, include_dirs=include_dirs, include_patterns=include_patterns, include_regex=include_regex, max_depth=max_depth, min_size=min_size, max_size=max_size, after_date=after_date, before_date=before_date, show_icons=args.txt_icons)
-        with open(out_file, "w", encoding="utf-8") as f:
+        if not args.stdout_only:
+          with open(out_file, "w", encoding="utf-8") as f:
             f.write(txt_content)
-        safe_print(f"✅ Tree output saved to {out_file}")
+        if stdout_enabled:
+          sys.stdout.write(txt_content)
+        if not args.stdout_only:
+          (print(f"✅ Tree output saved to {out_file}", file=sys.stderr) if stdout_enabled else safe_print(f"✅ Tree output saved to {out_file}"))
     elif args.type in ["csv", "json", "jsonl", "markdown"]:
         items = collect_tree_items(base, ignore_dirs=ignore_dirs, ignore_patterns=ignore_patterns, ignore_regex=ignore_regex, include_dirs=include_dirs, include_patterns=include_patterns, include_regex=include_regex, max_depth=max_depth, exts=exts, min_size=min_size, max_size=max_size, after_date=after_date, before_date=before_date)
         
         if args.type == "csv":
             out_file = args.out if args.out.lower().endswith(".csv") else os.path.splitext(args.out)[0] + ".csv"
-            export_csv(items, out_file)
+            if not args.stdout_only:
+                export_csv(items, out_file, quiet=stdout_enabled)
+            if stdout_enabled:
+                sys.stdout.write(items_to_csv(items))
         elif args.type == "json":
             out_file = args.out if args.out.lower().endswith(".json") else os.path.splitext(args.out)[0] + ".json"
-            export_json(items, out_file)
+            if not args.stdout_only:
+                export_json(items, out_file, quiet=stdout_enabled)
+            if stdout_enabled:
+                sys.stdout.write(json.dumps(items, indent=2, default=str) + "\n")
         elif args.type == "jsonl":
             out_file = args.out if args.out.lower().endswith(".jsonl") else os.path.splitext(args.out)[0] + ".jsonl"
-            export_jsonl(items, out_file)
+            if not args.stdout_only:
+                export_jsonl(items, out_file, quiet=stdout_enabled)
+            if stdout_enabled:
+                sys.stdout.write(items_to_jsonl(items))
         elif args.type == "markdown":
             out_file = args.out if args.out.lower().endswith(".md") else os.path.splitext(args.out)[0] + ".md"
-            export_markdown(items, out_file)
+            if not args.stdout_only:
+                export_markdown(items, out_file, quiet=stdout_enabled)
+            if stdout_enabled:
+                sys.stdout.write(items_to_markdown(items))
     else:
         html_content = build_html_report(base, exts, args.group, ignore_dirs=ignore_dirs, ignore_patterns=ignore_patterns, ignore_regex=ignore_regex, include_dirs=include_dirs, include_patterns=include_patterns, include_regex=include_regex, max_depth=max_depth, min_size=min_size, max_size=max_size, after_date=after_date, before_date=before_date)
         out_file = args.out if args.out.lower().endswith(".html") else os.path.splitext(args.out)[0] + ".html"
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(html_content)
-        safe_print(f"✅ Tree output saved to {out_file}")
-        if not args.no_browser:
+        if not args.stdout_only:
+            with open(out_file, "w", encoding="utf-8") as f:
+                f.write(html_content)
+        if stdout_enabled:
+            sys.stdout.write(html_content)
+        if not args.stdout_only:
+            (print(f"✅ Tree output saved to {out_file}", file=sys.stderr) if stdout_enabled else safe_print(f"✅ Tree output saved to {out_file}"))
+        if not args.no_browser and not args.stdout_only:
             webbrowser.open(out_file)

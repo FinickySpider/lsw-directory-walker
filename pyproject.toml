@@ -7,6 +7,8 @@ name = "lsw-directory-walker"
 version = "0.1.1"
 description = "LSW: List Walker, an enhanced ls-inspired directory scanner and report generator"
 readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "FinickySpider" }]
 requires-python = ">=3.8"
 dependencies = [
   "flet>=0.28",
@@ -16,6 +18,7 @@ dependencies = [
 Homepage = "https://finickyspider.github.io/lsw-directory-walker"
 Repository = "https://github.com/FinickySpider/lsw-directory-walker"
 Documentation = "https://finickyspider.github.io/lsw-directory-walker"
+Changelog = "https://github.com/FinickySpider/lsw-directory-walker/releases"
 
 [project.scripts]
 lsw = "lsw:main"

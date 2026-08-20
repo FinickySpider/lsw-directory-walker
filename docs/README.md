@@ -4,6 +4,10 @@ LSW (List Walker) is a Python command-line utility inspired by `ls` for walking 
 
 The public package is available on [PyPI](https://pypi.org/project/lsw-directory-walker/).
 
+See the [GitHub Releases page](https://github.com/FinickySpider/lsw-directory-walker/releases) for version history. LSW uses the [MIT License](https://github.com/FinickySpider/lsw-directory-walker/blob/main/LICENSE); credit is appreciated but not required.
+
+The MIT license permits commercial use and redistribution. Please do not present unchanged or minimally changed copies as original work or imply that unofficial distributions are official or endorsed.
+
 This documentation describes the complete current behavior of the script, including its command-line interface, configuration files, filtering rules, output formats, interactive HTML report, and internal architecture.
 
 ## Start here

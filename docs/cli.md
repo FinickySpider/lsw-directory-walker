@@ -42,6 +42,8 @@ See the full [Graphical Launcher](gui.md) guide for the layout, filter behavior,
 | `--modified-after` | date/time | none | HTML, CSV, JSON, JSONL, Markdown |
 | `--modified-before` | date/time | none | HTML, CSV, JSON, JSONL, Markdown |
 | `--out` | filename | `tree_output.html` | all |
+| `--stdout` | flag | off | all |
+| `--stdout-only` | flag | off | all |
 | `--type` | output type | config or `html` | all |
 | `--group` | `none`, `type`, `prefix` | `none` | HTML |
 | `--no-browser` | flag | config | HTML |
@@ -194,6 +196,70 @@ python lsw.py --path . --type html --out reports\tree
 ```
 
 The parent directory must already exist.
+
+### `--stdout`
+
+Prints generated output to the terminal while still saving the file specified by `--out`. This is useful when another application or shell pipeline needs to consume the result immediately.
+
+```powershell
+lsw --path . --type json --stdout --out inventory.json
+lsw --path . --type csv --stdout --out inventory.csv
+lsw --path . --type txt --stdout --out tree.txt
+```
+
+When `--stdout` is active, save-status messages go to stderr so stdout contains only the selected output format.
+
+### `--stdout-only`
+
+Prints the generated output to stdout without creating the output file. This is the cleanest mode for applications that only need the result in memory or a pipeline.
+
+```powershell
+lsw --path . --type json --stdout-only
+```
+
+`--stdout-only` implies `--stdout`. For JSON, stdout contains one complete JSON document and no status messages. For JSONL, it contains one JSON object per line. Errors and diagnostic messages are sent to stderr.
+
+## Data flow for applications
+
+LSW uses the conventional process streams:
+
+```text
+scanned directory
+	|
+	v
+LSW filters and serializes the result
+	|------------------------------|
+	v                              v
+stdout: output data              stderr: status/errors
+	|                              |
+	v                              v
+your app parses JSON/text       your app logs or displays diagnostics
+```
+
+### JSON example
+
+PowerShell:
+
+```powershell
+$json = lsw --path . --type json --stdout-only | ConvertFrom-Json
+```
+
+Python:
+
+```python
+import json
+import subprocess
+
+result = subprocess.run(
+    ["lsw", "--path", folder, "--type", "json", "--stdout-only"],
+    capture_output=True,
+    text=True,
+    check=True,
+)
+items = json.loads(result.stdout)
+```
+
+With `--stdout`, the same serialized bytes go to stdout and a file is also written. With `--stdout-only`, no output file is opened or created. Status messages belong on stderr so they do not corrupt machine-readable stdout.
 
 ### `--type`
 

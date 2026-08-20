@@ -34,6 +34,8 @@ The generated site is written to `.retype/`. The configured site URL is:
 https://finickyspider.github.io/lsw-directory-walker
 ```
 
+Release history and package versions are maintained separately on the [GitHub Releases page](https://github.com/FinickySpider/lsw-directory-walker/releases) and [PyPI](https://pypi.org/project/lsw-directory-walker/).
+
 ### Manual deployment
 
 If you do not use Actions, run `retype build`, then publish the contents of `.retype/` through a hosting service or copy those generated files into the branch/folder configured for GitHub Pages. Do not replace the Markdown source in `docs/` with generated files unless you intentionally change the Retype input/output layout.

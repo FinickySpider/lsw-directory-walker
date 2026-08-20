@@ -4,6 +4,14 @@ LSW (List Walker) is a Python command-line utility inspired by `ls` that walks a
 
 Public package: [lsw-directory-walker on PyPI](https://pypi.org/project/lsw-directory-walker/).
 
+Latest releases are listed on the [GitHub Releases page](https://github.com/FinickySpider/lsw-directory-walker/releases). LSW is released under the [MIT License](LICENSE); credit is appreciated but not required.
+
+### Community request
+
+LSW is MIT licensed. You may use it, modify it, package it, and use it commercially. Attribution beyond the license notice is not required, but it is appreciated.
+
+Please do not misrepresent unchanged or minimally changed copies of LSW as your original work, or imply that unofficial forks, packages, or distributions are the official project or endorsed by the original author. The project name, repository identity, documentation, and branding should not be used to mislead users into thinking an unofficial redistribution is the original LSW project or is endorsed by FinickySpider. This is a request for honest attribution and branding, not an additional restriction on the MIT license.
+
 ## Documentation
 
 This repository includes a Retype documentation site. Run `retype start` from the repository root to preview it, or `retype build` to generate static files in `.retype/`.
@@ -73,6 +81,21 @@ To export a filtered inventory:
 
 ```powershell
 python lsw.py --path . --type csv --ext .py,.json --ignore node_modules --out inventory.csv
+```
+
+To print output for use in a pipeline while also saving the same file:
+
+```powershell
+lsw --path . --type json --stdout --out inventory.json
+lsw --path . --type txt --stdout --out tree.txt
+```
+
+`--stdout` supports every output type and is additive, so omitting it preserves file-only behavior.
+
+To print only, without creating a file:
+
+```powershell
+lsw --path . --type json --stdout-only
 ```
 
 ## Important behavior notes
