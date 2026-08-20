@@ -17,8 +17,11 @@ This repository includes a Retype documentation site. Run `retype start` from th
 - [HTML report guide](docs/html-report.md): tree controls, search, grouping, analytics, and browser behavior.
 - [Developer reference](docs/developer-reference.md): function map, execution flow, data contracts, and known implementation notes.
 - [Documentation deployment](docs/deployment.md): publish the Retype site with GitHub Pages.
+- [Release guide](docs/releasing.md): publish future versions to PyPI.
 
 Documentation deployment is automated by `.github/workflows/retype-pages.yml`. Set the repository's GitHub Pages source to **GitHub Actions**.
+
+Future releases can be prepared with `.\scripts\release.ps1`, which bumps the version, runs checks, builds the package, pushes the release commit, and creates the GitHub Release that triggers PyPI publishing.
 
 ## Requirements
 

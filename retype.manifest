@@ -1,6 +1,6 @@
 {
   "version": "4.5.2",
-  "created": "2026-08-20T20:34:19Z",
+  "created": "2026-08-20T20:41:53Z",
   "files": [
     {
       "path": ".nojekyll"
@@ -85,6 +85,12 @@
     },
     {
       "path": "readme.md"
+    },
+    {
+      "path": "releasing.md"
+    },
+    {
+      "path": "releasing\\index.html"
     },
     {
       "path": "resources\\css\\katex.css"

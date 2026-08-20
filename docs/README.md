@@ -16,6 +16,7 @@ This documentation describes the complete current behavior of the script, includ
 - [HTML report guide](html-report.md): use search, grouping, analytics, path copying, and printing.
 - [Developer reference](developer-reference.md): follow the execution flow and data contracts.
 - [Documentation deployment](deployment.md): publish the Retype site with GitHub Pages.
+- [Release guide](releasing.md): publish future versions to PyPI.
 
 ## Quick start
 
